@@ -3,7 +3,7 @@ package it.unipd.tos.model;
 import java.util.List;
 import it.unipd.tos.business.TakeAwayBill;
 import it.unipd.tos.model.MenuItem;
-public class TakeAwayBillImplementation implements TakeAwayBill {
+public class TakeAwayBillImplementation implements TakeAwayBill{
 public double getOrderPrice(List<MenuItem> itemsOrdered) throws TakeAwayBillException{
 double total=0.0;
 double cheapest=-1;
@@ -32,7 +32,7 @@ total *= 0.9;
 if(paniniCount > 5) {
 total -= cheapest / 2;
 }
-if (total < 10) {
+if (total < 10 && total > 0) {
 total += 0.5;
 }
 return total;
