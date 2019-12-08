@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TakeAwayBillImplementation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sandwich-shop-manager</a> &gt; <a href="index.source.html" class="el_package">it.unipd.tos.model</a> &gt; <span class="el_source">TakeAwayBillImplementation.java</span></div><h1>TakeAwayBillImplementation.java</h1><pre class="source lang-java linenums">//Daniel James Tronca 1168535
+package it.unipd.tos.model;
+import java.util.List;
+import it.unipd.tos.business.TakeAwayBill;
+import it.unipd.tos.model.MenuItem;
+<span class="nc" id="L6">public class TakeAwayBillImplementation implements TakeAwayBill {</span>
+public double getOrderPrice(List&lt;MenuItem&gt; itemsOrdered) throws TakeAwayBillException{
+<span class="nc" id="L8">double total=0.0;</span>
+<span class="nc" id="L9">double cheapest=-1;</span>
+<span class="nc" id="L10">int paniniCount=0;</span>
+<span class="nc" id="L11">double paniniFrittiCount=0.0;</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">if (itemsOrdered.size() &gt; 30) {</span>
+<span class="nc" id="L13">throw new TakeAwayBillException(&quot;Sono stati fatti troppi ordini.&quot;);</span>
+}
+<span class="nc bnc" id="L15" title="All 2 branches missed.">for(MenuItem item: itemsOrdered) {</span>
+<span class="nc" id="L16">total += item.getPrice();</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">if(item.getType() == &quot;PANINO&quot;) {</span>
+<span class="nc" id="L18">paniniCount++;</span>
+<span class="nc" id="L19">double paninoPrice = item.getPrice();</span>
+<span class="nc" id="L20">paniniFrittiCount += paninoPrice;</span>
+<span class="nc bnc" id="L21" title="All 4 branches missed.">if(paninoPrice &lt; cheapest || cheapest &lt; 0.0) {</span>
+<span class="nc" id="L22">cheapest = paninoPrice;</span>
+}
+<span class="nc" id="L24">}</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">else if(item.getType() == &quot;FRITTO&quot;) {</span>
+<span class="nc" id="L26">paniniFrittiCount += item.getPrice();</span>
+}
+<span class="nc" id="L28">}</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">if(paniniFrittiCount &gt; 50) {</span>
+<span class="nc" id="L30">total *= 0.9; </span>
+}
+<span class="nc bnc" id="L32" title="All 2 branches missed.">if(paniniCount &gt; 5) {</span>
+<span class="nc" id="L33">total -= cheapest / 2;</span>
+}
+<span class="nc bnc" id="L35" title="All 2 branches missed.">if (total &lt; 10) {</span>
+<span class="nc" id="L36">total += 0.5;</span>
+}
+<span class="nc" id="L38">return total;</span>
+}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
